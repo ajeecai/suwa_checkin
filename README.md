@@ -36,7 +36,7 @@ This is one of screenshots, the canvas for edges is not necessary, only show it 
 
 Want to share what I learn from this test.
 
-- `selector` syntax in playwright is almost the same as that of css selector.
+- selector is the key of playwright, it is mostly like css selector. `page.locator("button:has(span) .MuiButton-label")` represents AND relation, while `page.locator("button:has-text('abc'),button:has-text('xyz')` stands for OR, waiting for appearance of button abc or xyz. So far I can only write simple selector syntax. One trick is writing like `await page.locator("button:has(span)").click()`, this will run into error according to [strickness](https://playwright.dev/docs/locators#strictness), the error msg shows the elements resolved and corresponding matching syntax, but it only show maximum 10 entries. The easier way is to list all buttons, then loop to find expected one.
 
 - `evaluate` in playwright runs the pageFunction in browser context, **not** in node context. This bothers me much at the very beginning. With the imported several opencv js bindings, like [this](https://github.com/theothergrantdavidson/opencv-ts) and [this](https://github.com/TechStark/opencv-js), use cv in pageFunction, in runtime `xxx is not defined` is seen. So official opencv.js is passed as a string parameter into pageFunction, it is size of 8M+, currently it is fine until it becomes huge in the future :). You may notice that inside evaluate pageFunction, there are no types, considering the types in aforesaid third-party wrappers may not be consistent with what I actually use in pageFunction.
 

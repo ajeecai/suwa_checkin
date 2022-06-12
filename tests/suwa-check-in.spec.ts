@@ -227,6 +227,25 @@ test("suwa", async ({ page }) => {
     return;
   }
 
+  // await page.locator("button:has(span)").click();
+  // await page.locator("button:has(span) .MuiButton-label").click();
+  // await page
+  //   .locator("button:has-text('确定'),button:has-text('签到')")
+  //   .evaluate((node) => {});
+  // await page.locator("button:has-text('确定')").click();
+
+  const buttons = page.locator("button");
+  const count = await buttons.count();
+  for (let i = 0; i < count; ++i) {
+    const button = buttons.nth(i);
+    const text = await buttons.nth(i).textContent();
+    console.log("#", i, " ", text);
+    if (text == "确定") {
+      console.log("there is an anouncement popup, click it");
+      await button.click();
+    }
+  }
+
   await page.locator("button", { hasText: "签到" }).click();
 
   // Let's take a photo
