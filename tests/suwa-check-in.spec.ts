@@ -83,7 +83,7 @@ test("suwa", async ({ page }) => {
     console.log(...values);
   });
 
-  const cv_content = fs.readFileSync("./tests/opencv.js", "utf-8");
+  const cv_content = fs.readFileSync("./assets/opencv.js", "utf-8");
 
   // pass 8M+ content of opencv.js as a parameter
   await page.evaluate((cv_content) => {
